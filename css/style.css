@@ -509,6 +509,51 @@ html[data-theme="light"] .map-embed iframe{ filter: none; }
 .breadcrumb{ font-family: var(--font-mono); font-size: .78rem; color: var(--text-faint); margin-bottom: 18px; }
 .breadcrumb span{ color: var(--spec-cyan); }
 
+/* ------------------------------- crew / leadership (team page) ------------------ */
+.leader-grid{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.leader-card{
+  padding: 32px 24px; text-align: center; position: relative;
+  background: linear-gradient(160deg, rgba(0,98,155,.14), rgba(124,58,237,.08));
+  border: 1px solid rgba(34,211,238,.35);
+}
+.leader-card .member-photo{ width: 108px; height: 108px; font-size: 1.7rem; border-width: 3px; }
+.leader-card h4{ font-size: 1.15rem; margin-top: 4px; }
+.leader-badge{
+  position: absolute; top: 16px; right: 16px; font-family: var(--font-mono); font-size: .62rem;
+  padding: 4px 10px; border-radius: 999px; background: var(--spectrum-gradient);
+  color: #06111f; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+}
+
+.dept-block{ margin-bottom: 68px; }
+.dept-block-title{
+  font-family: var(--font-display); font-size: 1.35rem; color: var(--text-hi); margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+.dept-block-title .spectrum-rule{ flex: 1; height: 2px; }
+
+.dept-head-row{ display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; margin-bottom: 14px; }
+.dept-head-card{
+  padding: 26px 18px; text-align: center; position: relative;
+  background: linear-gradient(160deg, rgba(251,191,36,.12), rgba(251,106,106,.06));
+  border: 1px solid rgba(251,191,36,.35);
+}
+.dept-head-card .member-photo{ width: 86px; height: 86px; border-width: 3px; border-color: var(--spec-amber); }
+.head-tag{
+  position: absolute; top: 14px; right: 14px; font-family: var(--font-mono); font-size: .6rem;
+  padding: 4px 9px; border-radius: 999px; background: var(--spec-amber); color: #1a0f00;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+}
+.assoc-tag{ background: var(--spec-cyan); color: #06111f; }
+
+.members-label{
+  font-family: var(--font-mono); font-size: .74rem; color: var(--text-faint); text-transform: uppercase;
+  letter-spacing: .06em; margin: 22px 0 16px; display: flex; align-items: center; gap: 12px;
+}
+.members-label::after{ content: ""; flex: 1; height: 1px; background: rgba(154,167,194,.15); }
+
+@media (max-width: 900px){ .leader-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px){ .leader-grid{ grid-template-columns: 1fr; } .dept-head-row{ grid-template-columns: repeat(2, 1fr); } }
+
 @media (max-width: 700px){
   .section{ padding: 72px 0; }
   .footer-bottom{ flex-direction: column; }
