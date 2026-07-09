@@ -252,24 +252,13 @@
   color: var(--spec-cyan);
 }
 
-/* ---- Scroll Wrapper with enhanced fade ---- */
+/* ---- Scroll Wrapper with RIGHT-SIDE FADE ONLY ---- */
 .team-scroll-wrapper {
   position: relative;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, 
-    transparent 0%, 
-    rgba(0,0,0,0.2) 4%,
-    black 12%, 
-    black 88%, 
-    rgba(0,0,0,0.2) 96%,
-    transparent 100%);
-          mask-image: linear-gradient(to right, 
-    transparent 0%, 
-    rgba(0,0,0,0.2) 4%,
-    black 12%, 
-    black 88%, 
-    rgba(0,0,0,0.2) 96%,
-    transparent 100%);
+  /* Fade only the right edge – left side remains fully opaque */
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+          mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
 }
 
 .team-scroll {
