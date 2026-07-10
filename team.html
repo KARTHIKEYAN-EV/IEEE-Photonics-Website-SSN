@@ -9,8 +9,569 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<style>
+/* ==========================================================================
+   TEAM PAGE — ENHANCED INTERACTIVE STYLES
+   ========================================================================== */
+
+/* ---- Floating Particles Background ---- */
+.particles-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--spec-cyan);
+  opacity: 0;
+  animation: floatUp 8s infinite ease-in;
+}
+
+.particle:nth-child(odd) {
+  background: var(--spec-violet);
+}
+
+.particle:nth-child(3n) {
+  background: var(--ieee-blue-light);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
+
+/* ---- Team Section Header Glow ---- */
+.team-section-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.1); }
+}
+
+/* ---- Enhanced Carousel Card ---- */
+.team-carousel-card {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              filter 0.4s ease;
+}
+
+.team-carousel-card:hover {
+  transform: translateY(-12px) scale(1.03);
+  z-index: 10;
+}
+
+.team-scroll:hover .team-carousel-card:not(:hover) {
+  filter: brightness(0.7) blur(1px);
+  transform: scale(0.96);
+}
+
+/* ---- Photo Container ---- */
+.member-photo-square {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--ieee-blue), var(--spec-violet));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: border-radius 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.team-carousel-card:hover .member-photo-square {
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(34,211,238,0.25), 0 0 60px rgba(124,58,237,0.15);
+}
+
+.member-photo-square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.team-carousel-card:hover .member-photo-square img {
+  transform: scale(1.08);
+}
+
+/* ---- Photo Overlay on Hover ---- */
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, 
+    rgba(7,11,24,0.7) 0%, 
+    transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  z-index: 3;
+  border-radius: inherit;
+}
+
+.team-carousel-card:hover .photo-overlay {
+  opacity: 1;
+}
+
+.photo-overlay .view-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.team-carousel-card:hover .photo-overlay .view-text {
+  transform: translateY(0);
+}
+
+/* ---- Badge ---- */
+.photo-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--spectrum-gradient);
+  color: #06111f;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  z-index: 5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.team-carousel-card:hover .photo-badge {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+.photo-badge.assoc {
+  background: var(--spec-cyan);
+}
+
+/* ---- Info Box ---- */
+.member-info-box {
+  position: absolute;
+  bottom: -10px;
+  left: 16px;
+  right: 16px;
+  background: var(--ink-2);
+  border: 1px solid rgba(154,167,194,.15);
+  border-radius: 14px;
+  padding: 14px 16px 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: center;
+  z-index: 4;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              background 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.team-carousel-card:hover .member-info-box {
+  transform: translateY(-4px);
+  border-color: rgba(34,211,238,.4);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4), 0 0 30px rgba(34,211,238,0.1);
+}
+
+.member-info-box .name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-hi);
+  margin: 0 0 3px;
+  transition: color 0.3s ease;
+}
+
+.team-carousel-card:hover .member-info-box .name {
+  background: var(--spectrum-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.member-info-box .dept-info {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.team-carousel-card:hover .member-info-box .dept-info {
+  color: var(--spec-cyan);
+}
+
+/* ---- Scroll Wrapper with RIGHT-SIDE FADE ONLY ---- */
+.team-scroll-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* Fade only the right edge – left side remains fully opaque */
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+          mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
+}
+
+.team-scroll {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 40px 40px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.team-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Scroll Indicator Dots ---- */
+.scroll-indicator {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(154,167,194,.25);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.scroll-dot.active {
+  background: var(--spec-cyan);
+  width: 24px;
+  border-radius: 999px;
+  box-shadow: 0 0 12px rgba(34,211,238,.4);
+}
+
+.scroll-dot:hover {
+  background: rgba(34,211,238,.5);
+}
+
+/* ---- Department Block ---- */
+.dept-block {
+  margin-bottom: 80px;
+  position: relative;
+}
+
+.dept-block-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-hi);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.3s ease;
+}
+
+.dept-block:hover .dept-block-title {
+  transform: translateX(4px);
+}
+
+.dept-block-title .spectrum-rule {
+  flex: 1;
+  height: 2px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.dept-block:hover .dept-block-title .spectrum-rule {
+  opacity: 1;
+}
+
+/* ---- Popup Modal ---- */
+.member-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3,5,12,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.member-popup-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.member-popup {
+  background: var(--ink-2);
+  border: 1px solid rgba(34,211,238,.3);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 30px 60px rgba(0,0,0,.5), 0 0 40px rgba(34,211,238,.1);
+}
+
+.member-popup-overlay.active .member-popup {
+  transform: translateY(0) scale(1);
+}
+
+.popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(154,167,194,.25);
+  background: transparent;
+  color: var(--text-dim);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.popup-close:hover {
+  color: var(--spec-red);
+  border-color: var(--spec-red);
+  transform: rotate(90deg);
+}
+
+.popup-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border: 3px solid rgba(34,211,238,.5);
+  box-shadow: 0 12px 30px rgba(0,0,0,.3);
+  animation: popupPhotoIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popupPhotoIn {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.popup-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popup-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--spectrum-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 6px;
+}
+
+.popup-role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--spec-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.popup-dept {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+
+.popup-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: left;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(154,167,194,.12);
+}
+
+.popup-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.popup-detail-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+}
+
+.popup-detail-value {
+  font-size: 0.85rem;
+  color: var(--text-hi);
+  font-weight: 500;
+}
+
+/* ---- Scroll Navigation Arrows ---- */
+.scroll-arrows {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.scroll-arrow {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(154,167,194,.25);
+  background: transparent;
+  color: var(--text-dim);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scroll-arrow:hover {
+  color: var(--spec-cyan);
+  border-color: var(--spec-cyan);
+  box-shadow: 0 4px 16px rgba(34,211,238,.2);
+}
+
+.scroll-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---- Counter Badge ---- */
+.member-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-left: auto;
+}
+
+.member-count span {
+  color: var(--spec-cyan);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ---- Ripple Effect on Click ---- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(34,211,238,.4);
+  transform: scale(0);
+  animation: rippleEffect 0.7s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleEffect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .team-carousel-card {
+    flex: 0 0 200px;
+  }
+  
+  .member-info-box {
+    left: 10px;
+    right: 10px;
+    padding: 10px 12px 8px;
+  }
+  
+  .member-info-box .name {
+    font-size: 0.9rem;
+  }
+  
+  .popup-details {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
 <body>
+
+<!-- Floating Particles -->
+<div class="particles-container" id="particles"></div>
 
 <nav class="nav">
   <div class="wrap">
@@ -51,276 +612,623 @@
   <div class="wrap">
     <div class="breadcrumb">Home <span>/</span> Team</div>
     <h1>Meet the Crew — 2026–27</h1>
-    <p>The office bearers and team heads run point on everything the chapter does. Scroll down to meet every team in full — <strong style="color:var(--text-hi)">replace the initials below with real photos</strong> by swapping each <code>&lt;div class="member-photo"&gt;</code> for an <code>&lt;img&gt;</code> tag.</p>
+    <p>The office bearers and team heads run point on everything the chapter does. <strong style="color:var(--spec-cyan)">Click any card</strong> to view details, or scroll horizontally to explore.</p>
   </div>
 </header>
 
 <!-- FACULTY ADVISOR -->
-<section class="section section--tight">
-  <div class="wrap">
+<section class="section section--tight" style="position: relative;">
+  <div class="team-section-glow" style="background: var(--spec-violet); top: -100px; left: -100px;"></div>
+  <div class="wrap" style="position: relative; z-index: 2;">
     <div class="section-head reveal">
       <span class="eyebrow">410nm · faculty advisor</span>
       <h2>Guided by</h2>
     </div>
-      <div class="leader-grid" style="grid-template-columns:repeat(3,1fr); max-width:340px;">
-        <div class="card leader-card reveal">
-          <div class="member-photo">FA</div>
-          <h4>Faculty Name</h4>
-          <div class="role">Faculty Advisor / Coordinator</div>
-          <div class="dept">Dept. Name, SSN</div>
+    <div class="scroll-arrows">
+      <span class="member-count"><span>2</span> member</span>
+    </div>
+    <div class="team-scroll-wrapper">
+      <div class="team-scroll" data-scroll-id="faculty">
+        <div class="team-carousel-card" data-name="Dr. N.Venkateswaran" data-role="Professor" data-dept="Dept. of ECE, SSN" data-email="advisor@ssn.edu.in" data-phone="+91 044 2747 4844">
+          <div class="member-photo-square">
+            <img src="assets/images/team/faculty/venkateswaran.jpg" alt="Dr. N.Venkateswaran">
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Dr. N.Venkateswaran</p>
+            <p class="dept-info">Dept. of ECE, SSN</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Dr. S. Allwyn" data-role="Assistant Professor" data-dept="Dept. of BME, SSN" data-email="advisor@ssn.edu.in" data-phone="+91 044 2747 4844">
+          <div class="member-photo-square">
+            <img src="assets/images/team/faculty/allwyn.jpg" alt="Dr. Faculty Name">
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Dr. S. Allwyn</p>
+            <p class="dept-info">Dept. of BME, SSN</p>
+          </div>
         </div>
       </div>
-      <p style="color:var(--text-faint); font-size:.85rem; margin-top:14px;">— update the faculty advisor's name, department, and designation once confirmed.</p>
+      
+    </div>
+    <!-- <p style="color:var(--text-faint); font-size:.85rem; margin-top:14px;">— fill in the faculty advisor's actual name and department here.</p> -->
   </div>
 </section>
 
 <!-- OFFICE BEARERS -->
-<section class="section section--tight">
-  <div class="wrap">
+<section class="section section--tight" style="position: relative;">
+  <div class="team-section-glow" style="background: var(--ieee-blue); top: 50%; right: -150px; animation-delay: 1s;"></div>
+  <div class="wrap" style="position: relative; z-index: 2;">
     <div class="section-head reveal">
       <span class="eyebrow">460nm · office bearers</span>
       <h2>Chapter leadership</h2>
       <p>The core executive committee steering the society for 2026–27.</p>
     </div>
-
-    <div class="leader-grid">
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Chairperson</span>
-        <div class="member-photo">SM</div>
-        <h4>Smruti M</h4>
-        <div class="role">Chairperson</div>
-        <div class="dept">BME, 4th Year</div>
-      </div>
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Vice Chairperson</span>
-        <div class="member-photo">HR</div>
-        <h4>Harinisri Ramesh</h4>
-        <div class="role">Vice Chairperson</div>
-        <div class="dept">BME, 4th Year</div>
-      </div>
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Treasurer</span>
-        <div class="member-photo">SM</div>
-        <h4>Swathi Muralikrishnan</h4>
-        <div class="role">Treasurer</div>
-        <div class="dept">BME, 4th Year</div>
-      </div>
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Secretary</span>
-        <div class="member-photo">DP</div>
-        <h4>Divyakriti Prabhu Uma</h4>
-        <div class="role">Secretary</div>
-        <div class="dept">ECE, 3rd Year</div>
-      </div>
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Joint Secretary</span>
-        <div class="member-photo">VS</div>
-        <h4>Varun Sudheer</h4>
-        <div class="role">Joint Secretary</div>
-        <div class="dept">BME, 3rd Year</div>
-      </div>
-      <div class="card leader-card reveal">
-        <span class="leader-badge">Joint Secretary</span>
-        <div class="member-photo">VK</div>
-        <h4>Vishal Kadir P</h4>
-        <div class="role">Joint Secretary</div>
-        <div class="dept">BME, 3rd Year</div>
+    <div class="scroll-arrows">
+      <span class="member-count"><span>6</span> members</span>
+      <button class="scroll-arrow" onclick="scrollTeam('office-bearers', 'left')" aria-label="Scroll left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="scroll-arrow" onclick="scrollTeam('office-bearers', 'right')" aria-label="Scroll right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+    <div class="team-scroll-wrapper">
+      <div class="team-scroll" data-scroll-id="office-bearers">
+        <div class="team-carousel-card" data-name="Smruti M" data-role="Chairperson" data-dept="BME, 4th Year" data-email="smruti2310435@ssn.edu.in" data-phone="8072462802" data-instagram="smruti__2502">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/smruti.jpg" alt="Smruti M">
+            <span class="photo-badge">Chairperson</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Smruti M</p>
+            <p class="dept-info">BME, 4th Year</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Harinisri Ramesh" data-role="Vice Chairperson" data-dept="BME, 4th Year" data-email="harinisri2310440@ssn.edu.in" data-phone="8838345623" data-instagram="honeysa_18">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/harinisri.jpg" alt="Harinisri Ramesh">
+            <span class="photo-badge">Vice Chairperson</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Harinisri Ramesh</p>
+            <p class="dept-info">BME, 4th Year</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Swathi Muralikrishnan" data-role="Treasurer" data-dept="BME, 4th Year" data-email="swathi2210149@ssn.edu.in" data-phone="7358461509" data-instagram="_wobblyjelly474_">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/swathi.jpg" alt="Swathi Muralikrishnan">
+            <span class="photo-badge">Treasurer</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Swathi Muralikrishnan</p>
+            <p class="dept-info">BME, 4th Year</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Divyakriti Prabhu Uma" data-role="Secretary" data-dept="ECE, 3rd Year" data-email="divyakriti2410157@ssn.edu.in" data-phone="6381297058" data-instagram="divyakriti_17">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/divyakriti.jpg" alt="Divyakriti Prabhu Uma">
+            <span class="photo-badge">Secretary</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Divyakriti Prabhu Uma</p>
+            <p class="dept-info">ECE, 3rd Year</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Varun Sudheer" data-role="Joint Secretary" data-dept="BME, 3rd Year" data-email="varun2410158@ssn.edu.in" data-phone="8778146651" data-instagram="v.a.r.u.n.s_">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/varun.jpg" alt="Varun Sudheer">
+            <span class="photo-badge">Joint Secretary</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Varun Sudheer</p>
+            <p class="dept-info">BME, 3rd Year</p>
+          </div>
+        </div>
+        <div class="team-carousel-card" data-name="Vishal Kadir P" data-role="Joint Secretary" data-dept="BME, 3rd Year" data-email="Vishalkadir2410383@ssn.edu.in" data-phone="8050416273" data-instagram="vishal_kadir">
+          <div class="member-photo-square">
+            <img src="assets/images/team/office-bearers/vishal.jpg" alt="Vishal Kadir P">
+            <span class="photo-badge">Joint Secretary</span>
+            <div class="photo-overlay">
+              <span class="view-text">View Profile</span>
+            </div>
+          </div>
+          <div class="member-info-box">
+            <p class="name">Vishal Kadir P</p>
+            <p class="dept-info">BME, 3rd Year</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TEAMS -->
-<section class="section">
-  <div class="wrap">
+<section class="section" style="position: relative;">
+  <div class="team-section-glow" style="background: var(--spec-green); bottom: 200px; left: -100px; animation-delay: 2s;"></div>
+  <div class="wrap" style="position: relative; z-index: 2;">
     <div class="section-head reveal">
       <span class="eyebrow">530nm · the teams</span>
       <h2>Every department, head to member</h2>
-      <p>Each team's head(s) are highlighted first, with the full member list right below.</p>
+      <p>Scroll right to see the full team — heads first, then all members. <strong style="color:var(--spec-cyan)">Click any card</strong> for details.</p>
     </div>
 
     <!-- TECHNICAL TEAM -->
     <div class="dept-block reveal">
       <div class="dept-block-title">Technical Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">SS</div>
-          <h4>Swastika S</h4>
-          <div class="role">Technical Team Head</div>
-          <div class="dept">BME, 4th Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">BS</div>
-          <h4>B.S. Srimathy</h4>
-          <div class="role">Technical Team Head</div>
-          <div class="dept">BME, 4th Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag assoc-tag">Associate Head</span>
-          <div class="member-photo">YK</div>
-          <h4>Yazhissai K P</h4>
-          <div class="role">Technical Team Associate Head</div>
-          <div class="dept">EEE, 3rd Year</div>
-        </div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>6</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('technical', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('technical', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
-
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">MA</div><h4>M. Ashwin</h4><div class="role">Technical Team</div><div class="dept">ECE, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">SV</div><h4>S Sakthi Vijayalakshmi</h4><div class="role">Technical Team</div><div class="dept">EEE, 2nd Year</div></div>
-        <div class="card member-card"><div class="member-photo">AK</div><h4>Aravindaa Krishnan M</h4><div class="role">Technical Team</div><div class="dept">BME, 3rd Year</div></div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="technical">
+          <div class="team-carousel-card" data-name="Swastika S" data-role="Technical Team Head" data-dept="BME, 4th Year" data-email="swastika2311054@ssn.edu.in" data-phone="9952755989" data-instagram="swas1405">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/swastika.jpg" alt="Swastika S">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Swastika S</p>
+              <p class="dept-info">BME, 4th Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="B.S. Srimathy" data-role="Technical Team Head" data-dept="BME, 4th Year" data-email="srimathy2311028@ssn.edu.in" data-phone="8248975100" data-instagram="srimathy_22">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/srimathy.jpg" alt="B.S. Srimathy">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">B.S. Srimathy</p>
+              <p class="dept-info">BME, 4th Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Yazhissai K P" data-role="Technical Team Associate Head" data-dept="EEE, 3rd Year" data-email="yazhissai2410417@ssn.edu.in" data-phone="7339074585" data-instagram="yazhissai_._19">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/yazhissai.jpg" alt="Yazhissai K P">
+              <span class="photo-badge assoc">Associate Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Yazhissai K P</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="M. Ashwin" data-role="Technical Team" data-dept="ECE, 3rd Year" data-email="ashwin2410107@ssn.edu.in" data-phone="9092211066" data-instagram="ashwin_xyx">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/ashwin.jpg" alt="M. Ashwin">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">M. Ashwin</p>
+              <p class="dept-info">ECE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="S Sakthi Vijayalakshmi" data-role="Technical Team" data-dept="EEE, 2nd Year" data-email="sakthivijayalakshmi2511090@ssn.edu.in" data-phone="9445393764">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/sakthi-vijayalakshmi.jpg" alt="S Sakthi Vijayalakshmi">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">S Sakthi Vijayalakshmi</p>
+              <p class="dept-info">EEE, 2nd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Aravindaa Krishnan M" data-role="Technical Team" data-dept="BME, 3rd Year" data-email="aravindaakrishnan2410946@ssn.edu.in" data-phone="7358358608">
+            <div class="member-photo-square">
+              <img src="assets/images/team/technical/aravindaa.jpg" alt="Aravindaa Krishnan M">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Aravindaa Krishnan M</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- WEB DEVELOPMENT -->
     <div class="dept-block reveal">
       <div class="dept-block-title">Web Development Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">SR</div>
-          <h4>Santhoshkumar R</h4>
-          <div class="role">Web Development Head</div>
-          <div class="dept">IT, 4th Year</div>
-        </div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>4</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('webdev', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('webdev', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
-
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">VS</div><h4>Varsha S</h4><div class="role">Web Development Team</div><div class="dept">IT, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">SM</div><h4>Sujith M</h4><div class="role">Web Development Team</div><div class="dept">CSE, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">EK</div><h4>E. V. Karthikeyan</h4><div class="role">Web Development Team</div><div class="dept">CSE, 3rd Year</div></div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="webdev">
+          <div class="team-carousel-card" data-name="Santhoshkumar R" data-role="Web Development Head" data-dept="IT, 4th Year" data-email="santhoshkumar2310738@ssn.edu.in" data-phone="9342765568">
+            <div class="member-photo-square">
+              <img src="assets/images/team/web-development/santhosh.jpg" alt="Santhoshkumar R">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Santhoshkumar R</p>
+              <p class="dept-info">IT, 4th Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Varsha S" data-role="Web Development Team" data-dept="IT, 3rd Year" data-email="varsha2410848@ssn.edu.in" data-phone="8072143691" data-instagram="__ahsrav___">
+            <div class="member-photo-square">
+              <img src="assets/images/team/web-development/varshas.jpg" alt="Varsha S">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Varsha S</p>
+              <p class="dept-info">IT, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Sujith M" data-role="Web Development Team" data-dept="CSE, 3rd Year" data-email="Sujith2410789@ssn.edu.in" data-phone="9150394960" data-instagram="8i2e41111_061.3">
+            <div class="member-photo-square">
+              <img src="assets/images/team/web-development/sujithm.jpg" alt="Sujith M">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Sujith M</p>
+              <p class="dept-info">CSE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="E. V. Karthikeyan" data-role="Web Development Team" data-dept="CSE, 3rd Year">
+            <div class="member-photo-square">
+              <img src="assets/images/team/web-development/karthikeyanev.jpg" alt="E. V. Karthikeyan">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">E. V. Karthikeyan</p>
+              <p class="dept-info">CSE, 3rd Year</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- EVENT MANAGEMENT -->
     <div class="dept-block reveal">
       <div class="dept-block-title">Event Management Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">AA</div>
-          <h4>Alamutheivaanai Ar K</h4>
-          <div class="role">Event Management Head</div>
-          <div class="dept">BME, 3rd Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">YV</div>
-          <h4>Yogesh Vaduganathan</h4>
-          <div class="role">Event Management Head</div>
-          <div class="dept">BME, 3rd Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag assoc-tag">Associate Head</span>
-          <div class="member-photo">YS</div>
-          <h4>Yuva Sriram</h4>
-          <div class="role">Event Management Associate Head</div>
-          <div class="dept">BME, 3rd Year</div>
-        </div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>6</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('event', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('event', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
-
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">AS</div><h4>Arunsabari S</h4><div class="role">Event Management Team</div><div class="dept">ECE, 2nd Year</div></div>
-        <div class="card member-card"><div class="member-photo">KP</div><h4>Krish PS</h4><div class="role">Event Management Team</div><div class="dept">ECE, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">PM</div><h4>Praneetha MK</h4><div class="role">Event Management Team</div><div class="dept">EEE, 3rd Year</div></div>
-      </div>
-    </div>
-
-    <!-- PHOTOGRAPHY -->
-    <div class="dept-block reveal">
-      <div class="dept-block-title">Photography Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">KR</div>
-          <h4>S Kaushik Raj</h4>
-          <div class="role">Photography Head</div>
-          <div class="dept">EEE, 3rd Year</div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="event">
+          <div class="team-carousel-card" data-name="Alamutheivaanai Ar K" data-role="Event Management Head" data-dept="BME, 3rd Year" data-email="alamutheivaanai2410952@ssn.edu.in" data-phone="8610008161">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/alamutheivaanai.jpg" alt="Alamutheivaanai Ar K">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Alamutheivaanai Ar K</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Yogesh Vaduganathan" data-role="Event Management Head" data-dept="BME, 3rd Year" data-email="yogesh2410391@ssn.edu.in" data-phone="8438728288" data-instagram="_yogesh35_">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/yogesh.jpg" alt="Yogesh Vaduganathan">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Yogesh Vaduganathan</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Yuva Sriram" data-role="Event Management Associate Head" data-dept="BME, 3rd Year" data-email="yuva2410379@ssn.edu.in" data-phone="7598774597" data-instagram="coolboiyuva">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/yuva.jpg" alt="Yuva Sriram">
+              <span class="photo-badge assoc">Associate Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Yuva Sriram</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Arunsabari S" data-role="Event Management Team" data-dept="ECE, 2nd Year" data-email="arunsabari2510753@ssn.edu.in" data-phone="8807415149" data-instagram="a.run_sabari._.3">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/arunsabari.jpg" alt="Arunsabari S">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Arunsabari S</p>
+              <p class="dept-info">ECE, 2nd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Krish PS" data-role="Event Management Team" data-dept="ECE, 3rd Year" data-email="krish2412011@ssn.edu.in" data-phone="9600072444" data-instagram="kri5h.712">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/krishps.jpg" alt="Krish PS">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Krish PS</p>
+              <p class="dept-info">ECE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Praneetha MK" data-role="Event Management Team" data-dept="EEE, 3rd Year" data-email="praneetha2410933@ssn.edu.in" data-phone="9092999953">
+            <div class="member-photo-square">
+              <img src="assets/images/team/event-management/praneetha.jpg" alt="Praneetha MK">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Praneetha MK</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">DA</div><h4>Deepthi Anand</h4><div class="role">Photography Team</div><div class="dept">EEE, 3rd Year</div></div>
-      </div>
-    </div>
-
-    <!-- DESIGN -->
-    <div class="dept-block reveal">
-      <div class="dept-block-title">Design Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">SC</div>
-          <h4>Sajanth C</h4>
-          <div class="role">Design Head</div>
-          <div class="dept">BME, 3rd Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag assoc-tag">Associate Head</span>
-          <div class="member-photo">DA</div>
-          <h4>Deepthi Anand</h4>
-          <div class="role">Associate Design Head</div>
-          <div class="dept">EEE, 3rd Year</div>
-        </div>
-      </div>
-
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">SA</div><h4>Samyuktha</h4><div class="role">Design Team</div><div class="dept">BME, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">SS</div><h4>Shruthi Sankar</h4><div class="role">Design Team</div><div class="dept">BME, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">SB</div><h4>Sudharsan B</h4><div class="role">Design Team</div><div class="dept">CSE, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">KM</div><h4>Keerthana M</h4><div class="role">Design Team</div><div class="dept">BME, 3rd Year</div></div>
       </div>
     </div>
 
     <!-- PR AND SOCIAL MEDIA -->
     <div class="dept-block reveal">
       <div class="dept-block-title">PR &amp; Social Media Team <span class="spectrum-rule"></span></div>
-
-      <div class="dept-head-row">
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">SR</div>
-          <h4>Sushmitha R</h4>
-          <div class="role">PR &amp; Social Head</div>
-          <div class="dept">BME, 4th Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">KU</div>
-          <h4>Kavitha U</h4>
-          <div class="role">PR &amp; Social Head</div>
-          <div class="dept">EEE, 3rd Year</div>
-        </div>
-        <div class="card dept-head-card">
-          <span class="head-tag">Head</span>
-          <div class="member-photo">DS</div>
-          <h4>Dharigasri S</h4>
-          <div class="role">PR &amp; Social Head</div>
-          <div class="dept">BME, 3rd Year</div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>6</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('pr', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('pr', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="pr">
+          <div class="team-carousel-card" data-name="Sushmitha R" data-role="PR &amp; Social Head" data-dept="BME, 4th Year" data-email="sushmitha2311058@ssn.edu.in" data-phone="9176781335">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/sushmitha.jpg" alt="Sushmitha R">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Sushmitha R</p>
+              <p class="dept-info">BME, 4th Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Kavitha U" data-role="PR &amp; Social Head" data-dept="EEE, 3rd Year" data-email="kavitha2412038@ssn.edu.in" data-phone="9841269330" data-instagram="itz_kavee06">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/kavitha.jpg" alt="Kavitha U">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Kavitha U</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Dharigasri S" data-role="PR &amp; Social Associate Head" data-dept="BME, 3rd Year" data-email="dharigasri2410796@ssn.edu.in" data-phone="9566765691" data-instagram="dharigaaah_">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/dharigasri.jpg" alt="Dharigasri S">
+              <span class="photo-badge assoc">Associate Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Dharigasri S</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Paramjeeth S" data-role="PR &amp; Social Member" data-dept="EEE, 2nd Year" data-email="paramjeeth2510538@ssn.edu.in" data-phone="9342871885" data-instagram="param._30">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/paramjeeth.jpg" alt="Paramjeeth S">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Paramjeeth S</p>
+              <p class="dept-info">EEE, 2nd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Vaishnavee A" data-role="PR &amp; Social Member" data-dept="BME, 3rd Year" data-email="vaishnavee2410166@ssn.edu.in" data-phone="6385525331" data-instagram="th_vaish026">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/vaishnavee.jpg" alt="Vaishnavee A">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Vaishnavee A</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Afsana R" data-role="PR &amp; Social Member" data-dept="BME, 2nd Year" data-email="afsana2511064@ssn.edu.in" data-phone="9487038487" data-instagram="_._afsana_._21">
+            <div class="member-photo-square">
+              <img src="assets/images/team/pr-social/afsana.jpg" alt="Afsana R">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Afsana R</p>
+              <p class="dept-info">BME, 2nd Year</p>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="members-label">Team members</div>
-      <div class="team-grid">
-        <div class="card member-card"><div class="member-photo">PS</div><h4>Paramjeeth S</h4><div class="role">PR &amp; Social Media Team</div><div class="dept">EEE, 2nd Year</div></div>
-        <div class="card member-card"><div class="member-photo">VA</div><h4>Vaishnavee A</h4><div class="role">PR &amp; Social Media Team</div><div class="dept">BME, 3rd Year</div></div>
-        <div class="card member-card"><div class="member-photo">AR</div><h4>Afsana R</h4><div class="role">PR &amp; Social Media Team</div><div class="dept">BME, 2nd Year</div></div>
+    <!-- DESIGN -->
+    <div class="dept-block reveal">
+      <div class="dept-block-title">Design Team <span class="spectrum-rule"></span></div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>6</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('design', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('design', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="design">
+          <div class="team-carousel-card" data-name="Sajanth C" data-role="Design Head" data-dept="BME, 3rd Year" data-email="sajanth2410355@ssn.edu.in" data-phone="9500170354">
+            <div class="member-photo-square">
+              <img src="assets/images/team/design/sajanth.jpg" alt="Sajanth C">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Sajanth C</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+           <div class="team-carousel-card" data-name="Deepthi Anand" data-role="Design Team" data-dept="EEE, 3rd Year" data-email="deepthi2410227@ssn.edu.in" data-phone="8870276437" data-instagram="deepthi_08_16">
+            <div class="member-photo-square">
+              <img src="assets/images/team/photography/deepthi.jpg" alt="Deepthi Anand">
+               <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Deepthi Anand</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Samyuktha" data-role="Associate Design Head" data-dept="BME, 3rd Year" data-email="samyuktha2410962@ssn.edu.in" data-phone="7397479184" data-instagram="samyuktha.senthil">
+            <div class="member-photo-square">
+              <img src="assets/images/team/design/samyuktha.jpg" alt="Samyuktha">
+              <span class="photo-badge assoc">Associate Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Samyuktha</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          
+          <div class="team-carousel-card" data-name="Shruthi Sankar" data-role="Design Team" data-dept="BME, 3rd Year" data-email="shruthi2410115@ssn.edu.in" data-phone="8220220478" data-instagram="shrutheysanks_6">
+            <div class="member-photo-square">
+              <img src="assets/images/team/design/shruthi.jpg" alt="Shruthi Sankar">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Shruthi Sankar</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Sudharsan B" data-role="Design Team" data-dept="CSE, 3rd Year" data-email="sudharsan2410735@ssn.edu.in" data-phone="9442477758">
+            <div class="member-photo-square">
+              <img src="assets/images/team/design/sudharsan.jpg" alt="Sudharsan B">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Sudharsan B</p>
+              <p class="dept-info">CSE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Keerthana M" data-role="Design Team" data-dept="BME, 3rd Year" data-email="keerthana2410134@ssn.edu.in" data-phone="6383052105" data-instagram="keerthy_muthukumar">
+            <div class="member-photo-square">
+              <img src="assets/images/team/design/keerthana.jpg" alt="Keerthana M">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Keerthana M</p>
+              <p class="dept-info">BME, 3rd Year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHOTOGRAPHY -->
+    <div class="dept-block reveal">
+      <div class="dept-block-title">Photography Team <span class="spectrum-rule"></span></div>
+      <div class="scroll-arrows">
+        <span class="member-count"><span>2</span> members</span>
+        <button class="scroll-arrow" onclick="scrollTeam('photo', 'left')" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="scroll-arrow" onclick="scrollTeam('photo', 'right')" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      <div class="team-scroll-wrapper">
+        <div class="team-scroll" data-scroll-id="photo">
+          <div class="team-carousel-card" data-name="S Kaushik Raj" data-role="Photography Head" data-dept="EEE, 3rd Year" data-email="kaushikraj2410925@ssn.edu.in" data-phone="9840497796" data-instagram="skr_472">
+            <div class="member-photo-square">
+              <img src="assets/images/team/photography/kaushik.jpg" alt="S Kaushik Raj">
+              <span class="photo-badge">Head</span>
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">S Kaushik Raj</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
+          <div class="team-carousel-card" data-name="Deepthi Anand" data-role="Photography Team" data-dept="EEE, 3rd Year" data-email="deepthi2410227@ssn.edu.in" data-phone="8870276437" data-instagram="deepthi_08_16">
+            <div class="member-photo-square">
+              <img src="assets/images/team/photography/deepthi.jpg" alt="Deepthi Anand">
+              <div class="photo-overlay"><span class="view-text">View Profile</span></div>
+            </div>
+            <div class="member-info-box">
+              <p class="name">Deepthi Anand</p>
+              <p class="dept-info">EEE, 3rd Year</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div>
 </section>
+
+<!-- Member Popup Modal -->
+<div class="member-popup-overlay" id="memberPopup">
+  <div class="member-popup">
+    <button class="popup-close" onclick="closePopup()" aria-label="Close popup">✕</button>
+    <div class="popup-photo">
+      <img src="" alt="" id="popupImg">
+    </div>
+    <h3 class="popup-name" id="popupName"></h3>
+    <p class="popup-role" id="popupRole"></p>
+    <p class="popup-dept" id="popupDept"></p>
+    <div class="popup-details">
+      <div class="popup-detail-item">
+        <span class="popup-detail-label">Email</span>
+        <span class="popup-detail-value" id="popupEmail">—</span>
+      </div>
+      <div class="popup-detail-item">
+        <span class="popup-detail-label">Phone</span>
+        <span class="popup-detail-value" id="popupPhone">—</span>
+      </div>
+      <div class="popup-detail-item">
+        <span class="popup-detail-label">Instagram</span>
+        <span class="popup-detail-value" id="popupInsta">—</span>
+      </div>
+      <div class="popup-detail-item">
+        <span class="popup-detail-label">IEEE ID</span>
+        <span class="popup-detail-value" id="popupIEEE">—</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer class="site-footer">
   <div class="wrap">
@@ -370,5 +1278,108 @@
 </button>
 
 <script src="js/main.js"></script>
+<script>
+// ---- Floating Particles ----
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  const size = Math.random() * 4 + 2;
+  particle.style.width = size + 'px';
+  particle.style.height = size + 'px';
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.animationDelay = Math.random() * 8 + 's';
+  particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+  particlesContainer.appendChild(particle);
+}
+
+// ---- Scroll Team Function ----
+function scrollTeam(id, direction) {
+  const scroll = document.querySelector(`[data-scroll-id="${id}"]`);
+  const scrollAmount = 300;
+  if (direction === 'left') {
+    scroll.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  } else {
+    scroll.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+}
+
+// ---- Popup Functionality ----
+const popup = document.getElementById('memberPopup');
+const popupImg = document.getElementById('popupImg');
+const popupName = document.getElementById('popupName');
+const popupRole = document.getElementById('popupRole');
+const popupDept = document.getElementById('popupDept');
+const popupEmail = document.getElementById('popupEmail');
+const popupPhone = document.getElementById('popupPhone');
+const popupInsta = document.getElementById('popupInsta');
+const popupIEEE = document.getElementById('popupIEEE');
+
+document.querySelectorAll('.team-carousel-card').forEach(card => {
+  card.addEventListener('click', function(e) {
+    // Ripple effect
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const rect = this.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+    this.querySelector('.member-photo-square').appendChild(ripple);
+    setTimeout(() => ripple.remove(), 700);
+
+    // Get data
+    const name = this.dataset.name;
+    const role = this.dataset.role;
+    const dept = this.dataset.dept;
+    const email = this.dataset.email || '—';
+    const phone = this.dataset.phone || '—';
+    const insta = this.dataset.instagram || '—';
+    const imgSrc = this.querySelector('img').src;
+
+    // Populate popup
+    popupImg.src = imgSrc;
+    popupImg.alt = name;
+    popupName.textContent = name;
+    popupRole.textContent = role;
+    popupDept.textContent = dept;
+    popupEmail.textContent = email;
+    popupPhone.textContent = phone;
+    popupInsta.textContent = insta;
+
+    // Show popup
+    popup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closePopup() {
+  popup.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+popup.addEventListener('click', function(e) {
+  if (e.target === popup) {
+    closePopup();
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && popup.classList.contains('active')) {
+    closePopup();
+  }
+});
+
+// ---- Mouse-tracking glow on cards ----
+document.querySelectorAll('.team-carousel-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--mouse-x', `${x}%`);
+    card.style.setProperty('--mouse-y', `${y}%`);
+  });
+});
+</script>
 </body>
 </html>
