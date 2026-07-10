@@ -9,6 +9,77 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gallery.css">
+<style>
+.tl-photo {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.tl-photo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(124,58,237,.3) 0%, rgba(47,111,237,.25) 25%, rgba(34,211,238,.15) 45%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.tl-photo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px -16px rgba(124,58,237,.2);
+  border-color: rgba(124,58,237,.25);
+}
+.tl-photo:hover::before { opacity: 1; }
+.tl-photo:hover .tl-photo-label {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* lightbox mouse-tracking glow & pulsing border */
+#lightboxContent {
+  position: relative;
+  overflow: hidden;
+}
+#lightboxContent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--lb-x, 50%) var(--lb-y, 50%),
+    rgba(124,58,237,.3) 0%, rgba(47,111,237,.25) 25%, rgba(34,211,238,.15) 45%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+.lightbox-image-wrap {
+  position: relative;
+}
+.lightbox-image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    var(--spec-violet), var(--spec-blue), var(--spec-cyan),
+    var(--spec-green), var(--spec-amber), var(--spec-red));
+  background-size: 300% 300%;
+  animation: spectrumPulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 2px;
+}
+@keyframes spectrumPulse {
+  0%, 100% { background-position: 0% 50%; opacity: 0.35; filter: blur(1px); }
+  50% { background-position: 100% 50%; opacity: 0.7; filter: blur(0); }
+}
+</style>
 </head>
 <body>
 
@@ -51,7 +122,7 @@
   <div class="wrap">
     <div class="breadcrumb">Home <span>/</span> Gallery</div>
     <h1>Moments from the chapter</h1>
-    <p>Swap the placeholder tiles below with real event photography — see the note in <code>README.md</code> for the recommended image sizes.</p>
+    <p>Browse through highlights, hands-on workshops, and outreach activities organized by the SSN IEEE Photonics Society Student Chapter.</p>
   </div>
 </header>
 
@@ -67,7 +138,7 @@
       <button class="filter-btn" data-gallery-filter="Team Activities">Team Activities</button>
     </div>
 
-    <div class="gallery-grid reveal" id="galleryGrid"></div>
+    <div id="timelineContainer"></div>
   </div>
 </section>
 
@@ -125,25 +196,342 @@
 
 <script src="js/main.js"></script>
 <script>
-  const CATS = [
-    ["Workshops", "var(--spec-cyan), var(--spec-blue)", 220],
-    ["Guest Lectures", "var(--spec-violet), var(--ieee-blue)", 260],
-    ["Conferences", "var(--spec-amber), var(--spec-red)", 200],
-    ["Competitions", "var(--ieee-blue), var(--spec-cyan)", 240],
-    ["Industrial Visits", "var(--spec-green), var(--spec-cyan)", 210],
-    ["Team Activities", "var(--spec-amber), var(--spec-green)", 250],
+  const GALLERY_ITEMS = [
+    {
+      title: "Tech Talk: Recent Developments in Image Processing",
+      category: "Guest Lectures",
+      img: "assets/images/gallery/image7.jpg",
+      date: "28 Oct 2022",
+      pos: "top",
+      desc: "Dr. R. Nithya covered gray level transformation, histogram processing, filtering, frequency domain filtering, hybrid filter-based image enhancement, and her research on retinal disease detection."
+    },
+    {
+      title: "Photonics Outreach Program",
+      category: "Team Activities",
+      img: "assets/images/gallery/image5.jpg",
+      date: "27 Sep 2023",
+      desc: "Outreach at Govt. Girls Higher Secondary School, Thiruporur. Live demonstration of IR sensors, digital microscopes, and spectrophotometer experiments."
+    },
+    {
+      title: "Photonics Outreach Program (Interactive Demos)",
+      category: "Team Activities",
+      img: "assets/images/gallery/image11.jpg",
+      date: "27 Sep 2023",
+      desc: "Student volunteers demonstrating optical instrumentation and spectral properties to high school pupils."
+    },
+    {
+      title: "Photonics Outreach Program (Hands-on Sessions)",
+      category: "Team Activities",
+      img: "assets/images/gallery/image8.jpg",
+      date: "27 Sep 2023",
+      desc: "High school students got hands-on time to manipulate optical circuits and observe light properties."
+    },
+    {
+      title: "Cryptic Code Crash (C3)",
+      category: "Competitions",
+      img: "assets/images/gallery/image3.jpg",
+      date: "29 Oct 2024",
+      desc: "A multi-layered competition covering 'Morse Code Mania' with scoring twists, and 'Pictionary Puzzles' testing non-verbal communication and creativity."
+    },
+    {
+      title: "IEEE Photonics Society — Chapter Inauguration",
+      category: "Team Activities",
+      img: "assets/images/gallery/image6.png",
+      date: "28 Jul 2025",
+      desc: "Formal inauguration of the SSN IEEE Photonics Student Chapter. Keynote address by guest of honor Dr. Gowri Annasamy on healthcare biophotonics."
+    },
+    {
+      title: "IEEE Photonics Society — Badge Ceremony",
+      category: "Team Activities",
+      img: "assets/images/gallery/image17.png",
+      date: "28 Jul 2025",
+      desc: "Inauguration badge distribution ceremony to formally induct the core committee members."
+    },
+    {
+      title: "IEEE Photonics Society — LightScape Awards",
+      category: "Team Activities",
+      img: "assets/images/gallery/image21.png",
+      date: "28 Jul 2025",
+      desc: "Awarding certificates to the top three winners of the LightScape Photography Contest."
+    },
+    {
+      title: "IEEE Photonics Society — Keynote Lecture",
+      category: "Team Activities",
+      img: "assets/images/gallery/image22.png",
+      date: "28 Jul 2025",
+      desc: "Keynote presentation by Dr. Gowri Annasamy from IIITDM Kanchipuram on LiDAR in autonomous systems."
+    },
+    {
+      title: "IEEE Photonics Society — Chapter Coordinators",
+      category: "Team Activities",
+      img: "assets/images/gallery/image4.png",
+      date: "28 Jul 2025",
+      desc: "Dr. N. Venkateswaran and Dr. S. Allwyn welcoming the audience at the chemical seminar hall."
+    },
+    {
+      title: "IEEE Photonics Society — Group Photo",
+      category: "Team Activities",
+      img: "assets/images/gallery/image18.png",
+      date: "28 Jul 2025",
+      desc: "Inducted student core committee members posing with the coordinators and chief guest."
+    },
+    {
+      title: "LightScape: Capture Light, Reveal Science",
+      category: "Competitions",
+      img: "assets/images/gallery/image19.jpg",
+      date: "2-7 Jul 2025",
+      desc: "Creative composition demonstrating light refraction and physics principles, submitted to the LightScape contest."
+    },
+    {
+      title: "LightScape: Refractive Study",
+      category: "Competitions",
+      img: "assets/images/gallery/image20.jpg",
+      date: "2-7 Jul 2025",
+      desc: "Showcasing the interaction of laser beams and lenses in an everyday physics context."
+    },
+    {
+      title: "LightScape: Best Photon Shot",
+      category: "Competitions",
+      img: "assets/images/gallery/image15.png",
+      date: "2-7 Jul 2025",
+      desc: "Winner entry 'Best Photon Shot' by Adithya Sivakumar, highlighting aesthetic and scientific properties of light."
+    },
+    {
+      title: "LightScape: Best Conceptual Photo",
+      category: "Competitions",
+      img: "assets/images/gallery/image12.png",
+      date: "2-7 Jul 2025",
+      desc: "Winner entry 'Best Conceptual Photo' by B. Raaghavan, demonstrating light in science or everyday life."
+    },
+    {
+      title: "LightScape: Creative Composition",
+      category: "Competitions",
+      img: "assets/images/gallery/image13.png",
+      date: "2-7 Jul 2025",
+      desc: "Winner entry 'Creative Composition Award' by M. Vishal Venkat, evaluated on theme relevance."
+    },
+    {
+      title: "LightScape: Optical Patterns",
+      category: "Competitions",
+      img: "assets/images/gallery/image16.png",
+      date: "2-7 Jul 2025",
+      desc: "Exploring patterns and scientific phenomena of light waves and shadows."
+    },
+    {
+      title: "Mapping Neuromuscular Pathways — Seminar",
+      category: "Guest Lectures",
+      img: "assets/images/gallery/image14.jpg",
+      date: "7 Jan 2026",
+      desc: "Joint seminar by IEEE Photonics & Signal Processing Society on distributed, bidirectional neural mapping techniques."
+    },
+    {
+      title: "Mapping Neuromuscular Pathways — Exoskeleton Demos",
+      category: "Guest Lectures",
+      img: "assets/images/gallery/image10.png",
+      date: "7 Jan 2026",
+      desc: "Interactive demonstration of exoskeletons and rehabilitation robotics during the session."
+    },
+    {
+      title: "Mapping Neuromuscular Pathways — Brain-Computer Interfaces",
+      category: "Guest Lectures",
+      img: "assets/images/gallery/image2.jpg",
+      date: "7 Jan 2026",
+      pos: "top",
+      desc: "Discussing brain mapping tools including EEG, fMRI, fNIRS, and transcranial focused ultrasound."
+    },
+    {
+      title: "Mapping Neuromuscular Pathways — Student Attendance",
+      category: "Guest Lectures",
+      img: "assets/images/gallery/image9.jpg",
+      date: "7 Jan 2026",
+      pos: "top",
+      desc: "Students from ECE and BME departments attending the lecture at the Central Seminar Hall."
+    },
+    {
+      title: "Sensing with Light: Evolving Landscape",
+      category: "Workshops",
+      img: "assets/images/gallery/image23.jpg",
+      date: "21 Jan 2026",
+      desc: "Keynote presentation by Dr. Srijith covering Fiber Bragg Grating (FBG) sensor principles and optical interrogation."
+    },
+    {
+      title: "Sensing with Light: Physiological Monitoring",
+      category: "Workshops",
+      img: "assets/images/gallery/image25.jpg",
+      date: "21 Jan 2026",
+      desc: "FGB sensor applications in gait cycle measurements, hand gesture analysis, and wearable strain sensors."
+    },
+    {
+      title: "Sensing with Light: Sensor Demonstration",
+      category: "Workshops",
+      img: "assets/images/gallery/image24.png",
+      date: "21 Jan 2026",
+      desc: "Interactive demonstration of strain and pressure distribution analysis using optical sensors."
+    },
+    {
+      title: "Sensing with Light: Lecture Hall",
+      category: "Workshops",
+      img: "assets/images/gallery/image1.jpg",
+      date: "21 Jan 2026",
+      desc: "Over 100 students from Biomedical and ECE departments attending the session on wearable biomedical tech."
+    }
   ];
-  const grid = document.getElementById("galleryGrid");
-  let html = "";
-  CATS.forEach(([cat, grad, h])=>{
-    for (let i=1;i<=3;i++){
-      html += `<figure class="gallery-item" data-gallery-item data-category="${cat}">
-        <div class="ph" style="height:${h}px;background:linear-gradient(135deg, ${grad});">${cat} photo ${i}</div>
-        <figcaption>${cat} — Sample caption ${i}</figcaption>
-      </figure>`;
+
+  const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const MONTH_MAP = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+
+  function parseDate(dateStr) {
+    const parts = dateStr.split(" ");
+    const year = parseInt(parts[parts.length - 1]);
+    const month = MONTH_MAP[parts[parts.length - 2]];
+    return { year, month, key: year * 12 + month };
+  }
+
+  function groupByEvent(items) {
+    const groups = [];
+    let current = null;
+    items.forEach(item => {
+      const key = item.date + "||" + item.category;
+      if (current && current.key === key) {
+        current.items.push(item);
+      } else {
+        current = { key, items: [item], date: item.date, category: item.category, title: item.title };
+        groups.push(current);
+      }
+    });
+    return groups;
+  }
+
+  function renderTimeline(filter) {
+    const container = document.getElementById("timelineContainer");
+    const sorted = [...GALLERY_ITEMS].sort((a, b) => {
+      return parseDate(b.date).key - parseDate(a.date).key;
+    });
+    const filtered = filter === "all" ? sorted : sorted.filter(i => i.category === filter);
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="tl-empty">No photos match this category.</div>`;
+      return;
+    }
+
+    const events = groupByEvent(filtered);
+    const years = {};
+    events.forEach(ev => {
+      const d = parseDate(ev.date);
+      if (!years[d.year]) years[d.year] = {};
+      if (!years[d.year][d.month]) years[d.year][d.month] = [];
+      years[d.year][d.month].push(ev);
+    });
+
+    const yearKeys = Object.keys(years).map(Number).sort((a, b) => b - a);
+    let html = "";
+    yearKeys.forEach(year => {
+      html += `<div class="tl-year"><div class="tl-year-head"><span>${year}</span><div class="rule"></div></div>`;
+      const monthKeys = Object.keys(years[year]).map(Number).sort((a, b) => b - a);
+      monthKeys.forEach(month => {
+        html += `<div class="tl-month"><div class="tl-month-name">${MONTHS[month]}</div>`;
+        years[year][month].forEach(ev => {
+          html += `<div class="tl-event" data-gallery-category="${ev.category}">
+            <div class="tl-event-header">
+              <span class="tl-event-title">${ev.title.replace(/\s*\(.*?\)/g, "").replace(/[:—]\s*.*$/u, "")}</span>
+              <span class="tl-event-date">${ev.date}</span>
+              <span class="tl-event-cat">${ev.category}</span>
+            </div>
+            <div class="tl-strip">`;
+          ev.items.forEach(item => {
+            html += `<div class="tl-photo" data-tl-item data-title="${item.title}" data-desc="${item.desc}" data-date="${item.date}" data-img="${item.img}" data-category="${item.category}">
+              <img src="${item.img}" alt="${item.title}" loading="lazy" style="object-position:${item.pos || 'center'}">
+              <div class="tl-photo-label">${item.title}</div>
+            </div>`;
+          });
+          html += `</div></div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+
+    // lightbox
+    const lb = document.querySelector(".lightbox");
+    const lbBody = document.querySelector("[data-lightbox-body]");
+    if (lb && lbBody) {
+      container.querySelectorAll("[data-tl-item]").forEach(el => {
+        el.addEventListener("click", () => {
+          lbBody.innerHTML = `
+            <div id="lightboxContent" style="display:flex;flex-direction:column;overflow:hidden;border-radius:var(--radius);">
+              <div class="lightbox-image-wrap" style="background:#000;display:flex;align-items:center;justify-content:center;max-height:75vh;overflow:hidden;">
+                <img src="${el.dataset.img}" alt="${el.dataset.title}" style="width:100%;height:auto;max-height:75vh;object-fit:contain;display:block;">
+              </div>
+              <div style="padding:24px;background:var(--ink-2);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+                  <span style="background:rgba(34,211,238,0.1);color:var(--spec-cyan);padding:4px 10px;border-radius:4px;font-size:0.75rem;font-weight:600;border:1px solid rgba(34,211,238,0.2);">${el.dataset.category}</span>
+                  <span style="font-family:var(--font-mono);font-size:0.78rem;color:var(--text-faint);">${el.dataset.date}</span>
+                </div>
+                <h3 style="color:var(--text-hi);font-size:1.2rem;margin-bottom:10px;font-family:var(--font-display);line-height:1.3;">${el.dataset.title}</h3>
+                <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.6;margin:0;">${el.dataset.desc}</p>
+              </div>
+            </div>`;
+          lb.classList.add("open");
+          // mouse-tracking glow on lightbox content
+          const lbContent = document.getElementById("lightboxContent");
+          if (lbContent) {
+            lbContent.addEventListener("mousemove", (e) => {
+              const rect = lbContent.getBoundingClientRect();
+              lbContent.style.setProperty("--lb-x", `${((e.clientX - rect.left) / rect.width) * 100}%`);
+              lbContent.style.setProperty("--lb-y", `${((e.clientY - rect.top) / rect.height) * 100}%`);
+            });
+          }
+        });
+      });
+    }
+  }
+
+  // filter
+  let activeFilter = "all";
+  document.querySelectorAll("[data-gallery-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll("[data-gallery-filter]").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.galleryFilter;
+      renderTimeline(activeFilter);
+      attachImgLoadListeners();
+    });
+  });
+
+  renderTimeline("all");
+
+  // Hide skeleton shimmer once each image loads
+  function attachImgLoadListeners() {
+    document.querySelectorAll('.tl-photo > img').forEach(img => {
+      if (img.complete) {
+        img.closest('.tl-photo')?.classList.add('img-loaded');
+      } else {
+        img.addEventListener('load', () => {
+          img.closest('.tl-photo')?.classList.add('img-loaded');
+        });
+      }
+    });
+  }
+  attachImgLoadListeners();
+
+  // mouse-tracking glow on photo tiles
+  document.querySelectorAll('.tl-photo').forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      el.style.setProperty('--mouse-x', `${((e.clientX - rect.left) / rect.width) * 100}%`);
+      el.style.setProperty('--mouse-y', `${((e.clientY - rect.top) / rect.height) * 100}%`);
+    });
+  });
+
+  // lightbox close
+  document.querySelector(".lightbox-close")?.addEventListener("click", () => {
+    document.querySelector(".lightbox").classList.remove("open");
+  });
+  document.querySelector(".lightbox")?.addEventListener("click", (e) => {
+    if (e.target === document.querySelector(".lightbox")) {
+      document.querySelector(".lightbox").classList.remove("open");
     }
   });
-  grid.innerHTML = html;
 </script>
 </body>
 </html>
