@@ -1,0 +1,274 @@
+/* ═══════════════════════════════════════════════════════
+   Gallery Page — shadcn-inspired vanilla CSS
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Filter Pills (shadcn Button variant) ─────────────── */
+.gallery-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(154, 167, 194, 0.18);
+  background: transparent;
+  color: var(--text-dim, #9aa7c2);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.filter-btn:hover {
+  border-color: rgba(34, 211, 238, 0.45);
+  color: var(--spec-cyan, #22d3ee);
+  background: rgba(34, 211, 238, 0.06);
+}
+.filter-btn.active {
+  background: rgba(34, 211, 238, 0.12);
+  border-color: var(--spec-cyan, #22d3ee);
+  color: var(--spec-cyan, #22d3ee);
+  font-weight: 600;
+}
+
+/* ── Timeline structure ───────────────────────────────── */
+#timelineContainer { min-height: 200px; }
+.tl-year           { margin-bottom: 52px; }
+
+.tl-year-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+.tl-year-head span {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-hi, #e8edf8);
+  letter-spacing: -0.03em;
+}
+.tl-year-head .rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(34,211,238,0.4), transparent);
+}
+
+.tl-month      { margin-bottom: 28px; }
+.tl-month-name {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--spec-cyan, #22d3ee);
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.tl-event        { margin-bottom: 24px; }
+.tl-event-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.tl-event-title {
+  font-family: var(--font-display, 'Space Grotesk', sans-serif);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-hi, #e8edf8);
+}
+.tl-event-date {
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 0.7rem;
+  color: var(--text-faint, #5a6a8a);
+}
+.tl-event-cat {
+  font-size: 0.65rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--spec-cyan, #22d3ee);
+  border: 1px solid rgba(34,211,238,0.2);
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  letter-spacing: 0.04em;
+}
+
+/* ── Photo grid — uniform landscape cards ─────────────── */
+.tl-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+/* shadcn Card: fixed aspect-ratio so every card is same shape */
+.tl-photo {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(154, 167, 194, 0.1);
+  /* 16:9 landscape aspect ratio — no fixed pixel height needed */
+  aspect-ratio: 16 / 9;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.3s ease,
+              border-color 0.2s ease;
+}
+.tl-photo:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35),
+              0 0 0 1px rgba(34,211,238,0.25);
+  border-color: rgba(34,211,238,0.3);
+}
+
+/* Image fills the card completely, cropped — NO blank space ever */
+.tl-photo > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+              opacity 0.3s ease;
+}
+.tl-photo:hover > img { transform: scale(1.06); }
+
+/* Skeleton shimmer — shows while image loads */
+.tl-photo > img:not([src]),
+.tl-photo > img[src=""] {
+  opacity: 0;
+}
+.tl-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  z-index: 0;
+}
+.tl-photo > img.loaded ~ .tl-photo::before,
+.tl-photo.img-loaded::before {
+  display: none;
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Caption gradient overlay on hover */
+.tl-photo-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 32px 12px 10px;
+  background: linear-gradient(transparent, rgba(5,8,20,0.9));
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.35;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.tl-photo:hover .tl-photo-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Empty state */
+.tl-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-faint, #5a6a8a);
+  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-size: 0.88rem;
+}
+
+/* ── Lightbox (shadcn Dialog style) ──────────────────── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 4, 14, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 20px;
+}
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(154,167,194,0.2);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-dim, #9aa7c2);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.lightbox-close:hover {
+  background: rgba(34,211,238,0.1);
+  color: var(--spec-cyan, #22d3ee);
+}
+.lightbox-inner {
+  background: var(--ink-2, #0f1424);
+  border: 1px solid rgba(154,167,194,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6),
+              0 0 0 1px rgba(34,211,238,0.08);
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(154,167,194,0.2) transparent;
+}
+.lightbox.open .lightbox-inner {
+  transform: scale(1) translateY(0);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .tl-strip {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .tl-year-head span { font-size: 1.7rem; }
+  .gallery-filter { gap: 6px; }
+  .filter-btn { font-size: 0.75rem; padding: 5px 12px; }
+}

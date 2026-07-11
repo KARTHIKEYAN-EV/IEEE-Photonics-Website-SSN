@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — SSN IEEE Photonics Society</title>
-<meta name="description" content="Get in touch with the SSN IEEE Photonics Society Student Chapter — email, faculty advisor contact, address, and location map.">
+<meta name="description" content="Get in touch with the SSN IEEE Photonics Society Student Chapter — chairperson, vice chairperson, email, address, and location map.">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -208,9 +208,25 @@ html[data-theme="light"] .map-container-enhanced:hover iframe {
 }
 
 /* ---- Responsive ---- */
+.contact-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
 @media (max-width: 900px) {
+  .contact-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .map-container-enhanced {
     height: 240px;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-card-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -287,23 +303,10 @@ html[data-theme="light"] .map-container-enhanced:hover iframe {
   <div class="wrap" style="position: relative; z-index: 2;">
     
     <!-- Contact Cards Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
-      
-      <!-- Email Card -->
-      <div class="contact-card-enhanced contact-animate contact-animate-delay-1" id="email-card">
-        <div class="contact-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="4" width="20" height="16" rx="2"/>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-          </svg>
-        </div>
-        <p class="contact-label">Email</p>
-        <h3>Society Email</h3>
-        <p class="contact-detail">ssn.photonics@ssn.edu.in</p>
-      </div>
+    <div class="contact-card-grid">
 
-      <!-- Advisor Card -->
-      <div class="contact-card-enhanced contact-animate contact-animate-delay-2" id="advisor-card">
+      <!-- Advisor Card 1 -->
+      <div class="contact-card-enhanced contact-animate contact-animate-delay-1" id="advisor-card">
         <div class="contact-icon-wrapper">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="8" r="4"/>
@@ -311,12 +314,40 @@ html[data-theme="light"] .map-container-enhanced:hover iframe {
           </svg>
         </div>
         <p class="contact-label">Faculty Advisor</p>
-        <h3>Dr. Faculty Name</h3>
-        <p class="contact-detail">advisor@ssn.edu.in</p>
+        <h3>Dr. N. Venkateswaran</h3>
+        <p class="contact-detail">Professor, Dept. of ECE</p>
+        <p class="contact-detail">venkateswarann@ssn.edu.in</p>
+      </div>
+
+      <!-- Advisor Card 2 -->
+      <div class="contact-card-enhanced contact-animate contact-animate-delay-2" id="advisor-card-2">
+        <div class="contact-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/>
+          </svg>
+        </div>
+        <p class="contact-label">Faculty Advisor</p>
+        <h3>Dr. S. Allwyn</h3>
+        <p class="contact-detail">Assistant Professor, Dept. of BME</p>
+        <p class="contact-detail">allwyns@ssn.edu.in</p>
+      </div>
+
+      <!-- Email Card -->
+      <div class="contact-card-enhanced contact-animate contact-animate-delay-3" id="email-card">
+        <div class="contact-icon-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+        </div>
+        <p class="contact-label">Chairperson</p>
+        <h3>Smruti M</h3>
+        <p class="contact-detail">Smruti2310435@ssn.edu.in</p>
       </div>
 
       <!-- Address Card -->
-      <div class="contact-card-enhanced contact-animate contact-animate-delay-3" id="address-card">
+      <div class="contact-card-enhanced contact-animate contact-animate-delay-4" id="address-card">
         <div class="contact-icon-wrapper">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 22s7-7.5 7-12a7 7 0 0 0-14 0c0 4.5 7 12 7 12z"/>
@@ -328,17 +359,7 @@ html[data-theme="light"] .map-container-enhanced:hover iframe {
         <p class="contact-detail">SSN College of Engineering,<br>Old Mahabalipuram Road,<br>Kalavakkam, Chennai – 603110</p>
       </div>
 
-      <!-- Phone Card -->
-      <div class="contact-card-enhanced contact-animate contact-animate-delay-4" id="phone-card">
-        <div class="contact-icon-wrapper">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-        </div>
-        <p class="contact-label">Phone</p>
-        <h3>Chapter Contact</h3>
-        <p class="contact-detail">+91 044 2747 4844</p>
-      </div>
+
 
     </div>
 

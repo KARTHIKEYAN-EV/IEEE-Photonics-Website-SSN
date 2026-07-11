@@ -1,0 +1,138 @@
+﻿2022
+1. Tech Talk: "Recent Developments in Image Processing"
+Organized by SSN IEEE Photonics Society SB Chapter as part of IEEE Day celebrations.
+* Date: 28 Oct 2022, 11:00 AM – 12:00 PM IST
+* Venue: Central Seminar Hall, SSN College of Engineering, Chennai
+* Speaker: Dr. R. Nithya, Assistant Professor, Biomedical Engineering Dept, SSN College of Engineering
+* Topics covered: Gray level transformation, histogram processing, filtering, frequency domain filtering, hybrid filter-based image enhancement, and her research on retinal disease detection
+* Audience: Students from multiple colleges/universities across various engineering disciplines
+  
+
+2. PhotonX: "Laser Tag" Program
+* Date: 26 Oct 2023, 10:00 AM – 1:00 PM IST
+* Venue: SSN College of Engineering, Kalavakkam, Chennai
+* Organizer: Dr. S. Allwyn, Assistant Professor, Dept. of Biomedical Engineering
+Highlights:
+* Dr. Allwyn delivered a lecture on laser tag circuits, properties of light, and its device applications, followed by an engaged Q&A
+* 14 student volunteers from the Photonics Society core committee — led by Chair Supraja Vaidhyanathan and Treasurer Aswathama (both 4th year BME) — conducted a hands-on workshop demonstrating a laser tag circuit using LDR sensors
+* Participants built their own circuits and competed in a laser tag game
+* Winners and runners-up received certificates and cash prizes
+* All attendees received e-certificates
+3. Photonics Outreach Program
+* Date: 27 Sep 2023, 12:00 PM – 4:00 PM IST
+* Venue: Govt. Girls Higher Secondary School, Thiruporur, Chennai
+* Organizer: Dr. N. Venkateswaran, Student Branch Coordinator, IEEE Photonics Society SSN Chapter (Professor, Dept. of Biomedical Engineering)
+Highlights:
+* Dr. S. Allwyn (Assistant Professor, Biomedical Engineering) lectured 130+ 11th-grade girls on light, its properties, and device applications, sparking enthusiastic Q&A
+* 14 student volunteers from the Photonics Society core committee, led by Chair Supraja Vaidhyanathan, demonstrated live experiments (IR sensor, digital microscope, spectrophotometer) in batches
+* Students got hands-on time to manipulate circuits and observe changing results
+* All attendees received certificates
+  
+  
+  
+
+4. Cryptic Code Crash (C3) - Unveil the Mystery
+* Date: 29 Oct 2024, 9:00 AM – 12:00 PM IST
+* Venue: ECE Seminar Hall, SSN College of Engineering, Chennai
+* Organizer: IEEE Photonics Society, SSN Chapter
+* Participation: ~40 students across 15 teams
+Format:
+* Round 1 – Morse Code Mania: Multi-layered Q&A with scoring twists — +50 for correct follow-ups, -50 penalty for wrong answers, with a lifeline question worth +20. Top 6 teams advanced.
+* Round 2 – Pictionary Puzzles: Teams sketched and decoded visual clues under time pressure, testing non-verbal communication and creativity.
+Outcome: Top 2 teams (3rd-year ECE and IT students) won, receiving cash prizes for their performance across both rounds.
+  
+
+5. Presentation on Photonic Devices - International Light Day
+* Date: 20 May 2024, 6:30 PM – 8:30 PM IST
+* Format: Webinar
+* Venue: SH 49A, Kalavakkam, Chennai
+* Organizer: IEEE Photonics Student Chapter
+* Speaker: Dr. Esther Florence S.
+Highlights:
+* Introduced photonics fundamentals and their everyday applications (mobile phones, projectors, medical devices)
+* Explained LED principles — semiconductor physics, p-n junctions, and light generation — with healthcare applications like endoscopes and optical coherence tomography
+* Covered laser sources, including optical feedback, laser oscillation, and Fabry-Perot resonators, along with medical applications in surgery
+* Q&A session followed, with the speaker sharing her presentation with attendees afterward
+. 6. IEEE Photonics Society – Inauguration
+* Date: 28 Jul 2025, 2:00 PM – 3:30 PM IST
+* Venue: Chemical Seminar Hall, SSN College of Engineering
+* Organized by: IEEE Photonics Society, SSN College of Engineering
+* Coordinators: Dr. N. Venkateswaran & Dr. S. Allwyn
+* Participants: 2nd and 3rd year BME students (batches 2023–27 & 2024–28)
+Highlights:
+* Welcomed by Dr. Venkateswaran and Dr. Allwyn, who introduced the guest of honor
+* Keynote by Dr. Gowri Annasamy (Assistant Professor, IIITDM Kanchipuram) on photonics applications — from biophotonics in healthcare to LiDAR in autonomous systems
+* Winners of the LightScape Photography Contest were awarded certificates for their top three entries
+* Badge distribution ceremony formally inducted the core committee members
+* Concluded with a memento presented to the chief guest in appreciation
+The event marked the official launch of the IEEE Photonics Society SSN Chapter as a platform for innovation and collaboration in photonics.
+  
+
+  
+  
+
+  
+ 
+  
+  
+
+7. LightScape – Capture Light, Reveal Science
+* Format: Online photography contest
+* Duration: 2 Jul 2025 – 7 Jul 2025 (7 PM submission deadline)
+* Organized by: SSN IEEE Photonics Society, in collaboration with SSN Photography Club
+Details:
+* Theme: showcasing the role of light in science or everyday life
+* Guidelines: one original photo per participant, basic edits allowed, AI-generated content strictly prohibited
+* Entries submitted via a dedicated website built by the SSN Technical Team
+* Received 22 entries evaluated on creativity, theme relevance, and concept
+Winners:
+* Best Photon Shot: Adithya Sivakumar
+* Best Conceptual Photo: B. Raaghavan
+* Creative Composition Award: M. Vishal Venkat
+Results were announced on the society's Instagram page. The contest encouraged interdisciplinary engagement between photonics, science, and visual art.
+  
+  
+
+  
+  
+     
+8. Mapping Neuromuscular Pathways Using Non-invasive Multimodal Techniques
+* Date: 7 Jan 2026, 10:00 AM – 2:00 PM IST
+* Venue: Central Seminar Hall, ECE Annexure Building, SSN College of Engineering, Kalavakkam
+* Organizers: IEEE Photonics Society & IEEE Signal Processing Society (SPS) Student Chapters, SSN
+Highlights:
+* Explored challenges in neuromuscular mapping due to the system's distributed, bidirectional, multi-scale nature — no single method captures full causality, direction, and timing
+* Discussed non-invasive multimodal approaches, boosted by ML/modeling, with applications in neurorehabilitation and disease phenotyping (stroke, spinal cord injury, dystonia, ALS)
+* Covered pros (accessible, painless, reversible, easier ethical approval) and cons (lower spatial resolution, limited depth access, shorter recording duration) of non-invasive techniques
+* Introduced brain mapping tools (EEG, fMRI, fNIRS, transcranial focused ultrasound), neuromodulation techniques (TMS, tDCS, tACS), and peripheral/spinal mapping methods (EMG, motion capture, rehabilitation robotics)
+* Featured demos of exoskeletons/robots and discussion on brain-computer interfaces
+* Students showed strong interest in AI/ML applications in signal interpretation and were encouraged toward research careers in neurotechnology and biomedical engineering
+
+
+  
+  
+
+  
+  
+
+9. Sensing with Light: The Evolving Landscape of Photonics Technologies
+* Date: 21 Jan 2026, 2:00 PM – 4:00 PM IST
+* Venue: ECE Annexure Building, SSN College of Engineering, Kalavakkam
+* Speaker: Dr. Srijith
+* Attendance: ~100 students from Biomedical and ECE departments
+Highlights:
+* Introduced light as an electromagnetic waveform, covering amplitude, frequency, phase, and polarization in sensing/communication contexts
+* Explained Fiber Bragg Grating (FBG) working principles — periodic refractive index variation reflecting the Bragg wavelength, shifted by strain and temperature
+* Covered optical interrogation techniques for detecting wavelength shifts with high precision
+* Showcased biomedical applications of FBG sensors:
+   * Embedded sensors for continuous physiological monitoring
+   * Gait cycle measurement via cuff-based sensors
+   * Hand gesture analysis through wristband sensors
+   * Speech interpretation via neck-region strain detection
+   * Pressure/strain distribution analysis
+* Sparked interest in interdisciplinary research on optical sensing and wearable biomedical technologies
+  
+  
+
+  
+ C:\Users\smrut\OneDrive\Desktop\college files\IEEE\WhatsApp Image 2026-01-21 at 4.02.40 PM.jpeg
