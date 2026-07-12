@@ -6,46 +6,7 @@
 /* To add a new event: copy an object below and fill in the fields.
    date format: "YYYY-MM-DD" (24h not required), type: "upcoming" | "past"   */
 const EVENTS = [
-  {
-    id: "evt-01",
-    title: "Introduction to Fiber Optics — Hands-on Workshop",
-    date: "2026-07-18",
-    time: "10:00 AM – 1:00 PM",
-    venue: "Photonics Lab, ECE Block",
-    category: "Workshop",
-    type: "upcoming",
-    desc: "A beginner-friendly session on fiber optic communication, splicing demos, and loss measurement using an OTDR."
-  },
-  {
-    id: "evt-02",
-    title: "Guest Lecture: Silicon Photonics in Data Centers",
-    date: "2026-07-26",
-    time: "3:00 PM – 4:30 PM",
-    venue: "Seminar Hall 2",
-    category: "Guest Lecture",
-    type: "upcoming",
-    desc: "Industry expert session on integrated photonic circuits and their role in next-gen optical interconnects."
-  },
-  {
-    id: "evt-03",
-    title: "PhotonHack — 24hr Optics & Photonics Hackathon",
-    date: "2026-08-09",
-    time: "9:00 AM onwards",
-    venue: "Innovation Centre",
-    category: "Competition",
-    type: "upcoming",
-    desc: "Teams design working prototypes around light-based sensing, imaging, or communication. Prizes for top 3 teams."
-  },
-  {
-    id: "evt-04",
-    title: "IEEE Photonics Society Chapter Induction",
-    date: "2026-08-22",
-    time: "11:00 AM",
-    venue: "Main Auditorium",
-    category: "Society",
-    type: "upcoming",
-    desc: "Formal induction of the new executive committee and welcome session for incoming first-year members."
-  },
+
   {
     id: "evt-12",
     title: "Tech Talk: Recent Developments in Image Processing",

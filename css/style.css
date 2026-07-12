@@ -376,12 +376,26 @@ gap:20px;
 }
 .cal-day.muted{ color: var(--text-faint); opacity: .35; }
 .cal-day.today{ border-color: var(--spec-cyan); color: var(--text-hi); }
-.cal-day.has-event{ cursor: pointer; color: var(--text-hi); font-weight: 700; }
-.cal-day.has-event::after{
-  content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--spectrum-gradient);
-  position: absolute; bottom: 6px;
+.cal-day.has-event{
+  cursor: pointer;
+  color: var(--text-hi);
+  font-weight: 700;
+  background: rgba(47, 111, 237, 0.18);
+  border: 1.5px solid rgba(47, 111, 237, 0.55);
+  box-shadow: 0 0 10px rgba(47, 111, 237, 0.18);
+  transition: all .25s ease;
 }
-.cal-day.has-event:hover{ background: rgba(34,211,238,.12); }
+
+.cal-day.has-event::after{
+  display: none;
+}
+
+.cal-day.has-event:hover{
+  background: rgba(47, 111, 237, 0.28);
+  border-color: rgba(47, 111, 237, 0.8);
+  box-shadow: 0 0 14px rgba(47, 111, 237, 0.35);
+  transform: scale(1.06);
+}
 .cal-detail{ padding: 24px; min-height: 220px; }
 .cal-detail h4{ font-family: var(--font-mono); font-size: .74rem; color: var(--spec-cyan); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
 .cal-detail-body strong{ display: block; font-size: 1.1rem; color: var(--text-hi); margin-bottom: 8px; font-family: var(--font-display); }
