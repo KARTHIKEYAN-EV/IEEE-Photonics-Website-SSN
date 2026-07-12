@@ -231,8 +231,12 @@ input, textarea, select{ font-family: inherit; font-size: 1rem; }
 
 /* ------------------------------- hero --------------------------------------- */
 .hero{
-  min-height: 100vh; display: flex; align-items: center; padding-top: var(--nav-h);
-  position: relative; overflow: hidden;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  padding-top: var(--nav-h);
+  position: relative;
+  overflow: hidden;
 }
 .hero::before{
   content: ""; position: absolute; inset: -10% -10% auto auto; width: 60%; height: 70%;
