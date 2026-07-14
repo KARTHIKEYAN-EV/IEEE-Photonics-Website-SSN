@@ -16,7 +16,7 @@ const EVENTS = [
     category: "Guest Lecture",
     type: "past",
     desc: "IEEE Day celebration talk by Dr. R. Nithya on gray level transformation, histogram processing, filtering, and retinal disease detection.",
-    recap: "Organized as part of IEEE Day celebrations, Dr. R. Nithya (Assistant Professor, BME, SSN) delivered a talk on recent developments in image processing. Topics included gray level transformation, histogram processing, filtering, frequency domain filtering, hybrid filter-based image enhancement, and her research on retinal disease detection. The session was attended by students from multiple colleges and engineering disciplines."
+    recap: "Organized as part of IEEE Day celebrations, Dr. R. Nithya (Assistant Professor, BME, SSN) delivered a talk on recent developments in image processing. Topics included gray level transformation, histogram processing, filtering, frequency domain filtering, hybrid filter-based image enhancement, and her research on retinal disease detection."
   },
   {
     id: "evt-13",
@@ -30,17 +30,6 @@ const EVENTS = [
     recap: "Led by Dr. N. Venkateswaran and Dr. S. Allwyn, the team visited Govt. Girls Higher Secondary School, Thiruporur. Dr. Allwyn lectured 130+ 11th-grade girls on light, its properties, and device applications. 14 student volunteers from the Photonics Society core committee, led by Chair Supraja Vaidhyanathan, demonstrated live experiments including IR sensors, digital microscopes, and spectrophotometers. Students received hands-on time with circuits and all attendees were given certificates."
   },
   {
-    id: "evt-14",
-    title: "PhotonX: Laser Tag Program",
-    date: "2023-10-26",
-    time: "10:00 AM – 1:00 PM",
-    venue: "SSN College of Engineering",
-    category: "Workshop",
-    type: "past",
-    desc: "Hands-on workshop where participants built laser tag circuits using LDR sensors and competed in a laser tag game.",
-    recap: "Dr. S. Allwyn (Assistant Professor, BME) delivered a lecture on laser tag circuits, properties of light, and device applications, followed by an engaged Q&A. 14 student volunteers from the core committee — led by Chair Supraja Vaidhyanathan and Treasurer Aswathama — conducted a hands-on workshop demonstrating a laser tag circuit using LDR sensors. Participants built their own circuits and competed in a laser tag game. Winners and runners-up received certificates and cash prizes, and all attendees received e-certificates."
-  },
-  {
     id: "evt-15",
     title: "Presentation on Photonic Devices — International Light Day",
     date: "2024-05-20",
@@ -49,7 +38,7 @@ const EVENTS = [
     category: "Seminar",
     type: "past",
     desc: "International Light Day webinar by Dr. Esther Florence S. covering photonics fundamentals, LED principles, lasers, and medical applications.",
-    recap: "Dr. Esther Florence S. presented an online webinar on photonic devices as part of International Light Day celebrations. She introduced photonics fundamentals and everyday applications (mobile phones, projectors, medical devices), explained LED principles including semiconductor physics and p-n junctions, and covered laser sources, optical feedback, Fabry-Perot resonators, and medical applications in surgery and optical coherence tomography. The speaker shared her presentation with all attendees following a lively Q&A session."
+    recap: "Dr. Esther Florence S. presented an webinar on photonic devices as part of International Light Day celebrations. She introduced photonics fundamentals and everyday applications (mobile phones, projectors, medical devices), explained LED principles including semiconductor physics and p-n junctions, and covered laser sources, optical feedback, Fabry-Perot resonators, and medical applications in surgery and optical coherence tomography."
   },
   {
     id: "evt-16",
@@ -60,40 +49,7 @@ const EVENTS = [
     category: "Competition",
     type: "past",
     desc: "A two-round cryptic competition with Morse Code Mania and Pictionary Puzzles, drawing 40+ students across 15 teams.",
-    recap: "Organized by the IEEE Photonics Society, ~40 students across 15 teams participated. Round 1 (Morse Code Mania) featured multi-layered Q&A with scoring twists — +50 for correct follow-ups, -50 penalty for wrong answers, and a lifeline question worth +20. The top 6 teams advanced to Round 2 (Pictionary Puzzles) where teams sketched and decoded visual clues under time pressure. Top 2 teams (3rd-year ECE and IT students) won cash prizes for their performance across both rounds."
-  },
-  {
-    id: "evt-05",
-    title: "Laser Safety & Applications Seminar",
-    date: "2026-05-14",
-    time: "2:00 PM – 3:30 PM",
-    venue: "Seminar Hall 1",
-    category: "Seminar",
-    type: "past",
-    desc: "Covered laser classification, safety protocols, and applications in medicine, manufacturing, and research.",
-    recap: "The seminar covered laser classification, safety protocols, and applications in medicine, manufacturing, and research. Students learned about laser classes, hazard assessment, and safe operating procedures through interactive demonstrations and case studies."
-  },
-  {
-    id: "evt-06",
-    title: "National Conference on Optical Communication (attended)",
-    date: "2026-03-02",
-    time: "Full day",
-    venue: "IIT Madras",
-    category: "Conference",
-    type: "past",
-    desc: "Delegation of 12 members attended paper presentations and poster sessions on optical networking.",
-    recap: "A delegation of 12 members attended paper presentations and poster sessions on optical networking at IIT Madras. The team presented their research findings and networked with researchers from leading institutions across the country."
-  },
-  {
-    id: "evt-07",
-    title: "Industrial Visit — Optical Fiber Manufacturing Plant",
-    date: "2026-01-20",
-    time: "9:00 AM – 4:00 PM",
-    venue: "Off-campus",
-    category: "Industrial Visit",
-    type: "past",
-    desc: "Students observed the full fiber-drawing process, from preform fabrication to spooling and testing.",
-    recap: "Students observed the full fiber-drawing process, from preform fabrication to spooling and testing. The visit provided invaluable practical exposure to industrial-scale optical fiber manufacturing and quality control procedures including OTDR testing and tensile strength verification."
+    recap: "Organized by the IEEE Photonics Society, ~40 students across 15 teams participated. Round 1 (Morse Code Mania) featured multi-layered Q&A with scoring twists . Top 2 teams (3rd-year ECE and IT students) won cash prizes for their performance across both rounds."
   },
   {
     id: "evt-08",
@@ -104,7 +60,7 @@ const EVENTS = [
     category: "Society",
     type: "past",
     desc: "Official inauguration ceremony of the SSN IEEE Photonics Society Student Chapter.",
-    recap: "The chapter was formally inaugurated with speeches from Dr. N. Venkateswaran and Dr. S. Allwyn. The guest of honor, Dr. Gowri Annasamy (Assistant Professor, IIITDM Kanchipuram), delivered a keynote on photonics applications — from biophotonics in healthcare to LiDAR in autonomous systems. Winners of the LightScape Photography Contest were awarded certificates for their top three entries. A badge distribution ceremony formally inducted the core committee members, and a memento was presented to the chief guest. The event marked the official launch of the IEEE Photonics Society SSN Chapter as a platform for innovation and collaboration in photonics."
+    recap: "The chapter was formally inaugurated with speeches from Dr. N. Venkateswaran and Dr. S. Allwyn. The guest of honor, Dr. Gowri Annasamy (Assistant Professor, IIITDM Kanchipuram), delivered a keynote on photonics applications — from biophotonics in healthcare to LiDAR in autonomous systems. A badge distribution ceremony formally inducted the core committee members, and a memento was presented to the chief guest. The event marked the official launch of the IEEE Photonics Society SSN Chapter."
   },
   {
     id: "evt-09",
@@ -115,11 +71,11 @@ const EVENTS = [
     category: "Competition",
     type: "past",
     desc: "An online photography contest organized in collaboration with the SSN Photography Club — 'Capture Light, Reveal Science: From Nature to Everyday Glow.'",
-    recap: "Organized in collaboration with the SSN Photography Club from July 2 to 7, 2025, LIGHTSCAPE invited participants to capture the role of light in science and everyday life. 22 entries were evaluated on creativity, theme relevance, and concept. Winners: Best Photon Shot — Adithya Sivakumar, Best Conceptual Photo — B. Raaghavan, Creative Composition Award — M. Vishal Venkat. Results were announced on the society's Instagram page. The contest encouraged interdisciplinary engagement between photonics, science, and visual art."
+    recap: "Organized in collaboration with the SSN Photography Club from July 2 to 7, 2025, LIGHTSCAPE invited participants to capture the role of light in science and everyday life. Winners: Best Photon Shot — Adithya Sivakumar, Best Conceptual Photo — B. Raaghavan, Creative Composition Award — M. Vishal Venkat. Results were announced on the society's Instagram page."
   },
   {
     id: "evt-10",
-    title: "Invited Talk: Mapping Neuromuscular Pathways Using Non-invasive Multimodal Techniques",
+    title: "Talk on \"Mapping Neuromuscular Pathways Using Non-invasive Multimodal Techniques\"",
     date: "2026-01-07",
     time: "10:00 AM – 2:00 PM",
     venue: "Central Seminar Hall, ECE Annexure",
@@ -130,7 +86,7 @@ const EVENTS = [
   },
   {
     id: "evt-11",
-    title: "Sensing with Light: The Evolving Landscape of Photonics Technologies",
+    title: "Talk on \"Sensing with Light: The Evolving Landscape of Photonics Technologies\"",
     date: "2026-01-21",
     time: "2:00 PM – 4:00 PM",
     venue: "ECE Annexure Building",
