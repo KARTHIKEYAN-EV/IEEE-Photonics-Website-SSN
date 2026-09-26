@@ -117,15 +117,15 @@ const EVENTS = [
     desc: "Awareness session introducing ~50 Grade 11 Biology and Mathematics students to photonics through a conceptual talk and six live experiments, ending with sensor kit distribution.",
     recap: "As part of its outreach initiative, the IEEE Photonics Society Student Branch conducted a photonics awareness program at CHS Govt. High School, Perambur for around 50 Grade 11 students from the Biology and Mathematics streams. The session opened with an introductory talk on photonics under the theme 'Photonics — It's Not Just Light', followed by a discussion of career pathways in engineering and medicine. Six hands-on experiments were showcased — dispersion of white light using a prism, the Tyndall effect, UV fluorescence, smart pathway lighting, a flame detection system, and an automatic door. Basic sensors were distributed to all participating students to encourage continued hands-on exploration beyond the classroom."
   },
-  {
+    {
     id: "evt-19",
-    title: "IEEE Day 2026 — Photonics Society Celebration",
+    title: "Beyond the Beam — IEEE Day 2026",
     date: "2026-10-08",
-    time: "To be announced",
+    time: "10:00 AM – 1:30 PM",
     venue: "SSN College of Engineering, Kalavakkam",
-    category: "Society",
+    category: "Competition",
     type: "upcoming",
-    desc: "Join the SSN IEEE Photonics Society in celebrating IEEE Day 2026 — talks, demos, and activities for students across all colleges. Registration open now.",
+    desc: "High-stakes crisis intervention! Teams of 2 battle through two rounds — Round 1: decode progressively harder Morse-coded signals under time pressure. Round 2 'Lumen Rising': a head-to-head crisis-response card game where teams draw global crises, play technology cards, and pitch solutions in exactly 60 seconds while opponents try to sabotage. ₹59 per person for IEEE members, ₹110 for non-members (incl. GST).",
     registrationUrl: "https://forms.gle/ZvETYQPibku2JffE9"
   }
 ];
