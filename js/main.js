@@ -126,7 +126,7 @@ const EVENTS = [
     category: "Society",
     type: "upcoming",
     desc: "Join the SSN IEEE Photonics Society in celebrating IEEE Day 2026 — talks, demos, and activities for students across all colleges. Registration open now.",
-    registrationUrl: "PASTE_GOOGLE_FORM_LINK_HERE"
+    registrationUrl: "https://forms.gle/ZvETYQPibku2JffE9"
   }
 ];
 
