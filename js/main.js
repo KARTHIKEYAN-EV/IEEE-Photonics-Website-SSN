@@ -94,6 +94,39 @@ const EVENTS = [
     type: "past",
     desc: "Guest lecture by Dr. Srijith on Fiber Bragg Grating sensors, optical interrogation techniques, and wearable biomedical applications.",
     recap: "Dr. Srijith delivered an engaging talk to ~100 students from Biomedical and ECE departments. He introduced light as an electromagnetic waveform and explained Fiber Bragg Grating (FBG) working principles — periodic refractive index variation reflecting the Bragg wavelength, shifted by strain and temperature. Optical interrogation techniques for detecting wavelength shifts were covered, along with biomedical applications including embedded sensors for continuous physiological monitoring, gait cycle measurement via cuff-based sensors, hand gesture analysis through wristband sensors, speech interpretation via neck-region strain detection, and pressure/strain distribution analysis. The session sparked strong interest in interdisciplinary research on optical sensing and wearable biomedical technologies."
+  },
+  {
+    id: "evt-17",
+    title: "Inauguration Ceremony — Photonics Team 2026–27",
+    date: "2026-08-28",
+    time: "2:00 PM – 3:30 PM",
+    venue: "Central Seminar Hall, SSN College of Engineering",
+    category: "Society",
+    type: "past",
+    desc: "Formal inauguration of the Photonics Team for AY 2026–27, with Chief Guest Dr. Jyotirmayee Dash (Founder & CEO, TeraLumen Solutions) — keynote, badge distribution, and website launch.",
+    recap: "The Inauguration Ceremony formally launched the Photonics Team for AY 2026–27 at the Central Seminar Hall. Chief Guest Dr. Jyotirmayee Dash, Founder & CEO of TeraLumen Solutions — India's pioneering Terahertz technology company — delivered a keynote on the power of light and the future of photonics, drawing from her journey at CSIR-CECRI and her work applying Terahertz technology to cancer detection. The event featured a welcome and memento presentation, a badge distribution ceremony inducting the newly recruited members, and the official launch of the team's new website. The ceremony strengthened ties between the student chapter and industry and gave new members a firsthand look at a woman-led deep-tech startup journey in STEM and NDT."
+  },
+  {
+    id: "evt-18",
+    title: "Outreach Program on Photonics — Student Awareness Session",
+    date: "2026-09-07",
+    time: "Full Day",
+    venue: "CHS Govt. High School, Perambur",
+    category: "Society",
+    type: "past",
+    desc: "Awareness session introducing ~50 Grade 11 Biology and Mathematics students to photonics through a conceptual talk and six live experiments, ending with sensor kit distribution.",
+    recap: "As part of its outreach initiative, the IEEE Photonics Society Student Branch conducted a photonics awareness program at CHS Govt. High School, Perambur for around 50 Grade 11 students from the Biology and Mathematics streams. The session opened with an introductory talk on photonics under the theme 'Photonics — It's Not Just Light', followed by a discussion of career pathways in engineering and medicine. Six hands-on experiments were showcased — dispersion of white light using a prism, the Tyndall effect, UV fluorescence, smart pathway lighting, a flame detection system, and an automatic door. Basic sensors were distributed to all participating students to encourage continued hands-on exploration beyond the classroom."
+  },
+  {
+    id: "evt-19",
+    title: "IEEE Day 2026 — Photonics Society Celebration",
+    date: "2026-10-08",
+    time: "To be announced",
+    venue: "SSN College of Engineering, Kalavakkam",
+    category: "Society",
+    type: "upcoming",
+    desc: "Join the SSN IEEE Photonics Society in celebrating IEEE Day 2026 — talks, demos, and activities for students across all colleges. Registration open now.",
+    registrationUrl: "PASTE_GOOGLE_FORM_LINK_HERE"
   }
 ];
 
@@ -309,7 +342,11 @@ function initEventsPage(){
         </div>
         <div class="event-meta-row"><span>📍 ${e.venue}</span></div>
         <p class="desc">${e.desc}</p>
+        // <button class="btn ${e.type==='past'?'btn-ghost':'btn-primary'} btn-sm" data-details="${e.id}">${e.type==='past' ? 'View Recap' : 'View Details'}</button>
+      <div class="event-actions" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
         <button class="btn ${e.type==='past'?'btn-ghost':'btn-primary'} btn-sm" data-details="${e.id}">${e.type==='past' ? 'View Recap' : 'View Details'}</button>
+        ${e.type==='upcoming' && e.registrationUrl && e.registrationUrl !== 'PASTE_GOOGLE_FORM_LINK_HERE' ? `<a href="${e.registrationUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Register →</a>` : ''}
+      </div>
       </div>
     </article>`;
   }
@@ -354,6 +391,7 @@ function showEventRecap(id){
     <p class="desc">${event.desc}</p>
     <span class="tag">${event.category}</span>
     ${event.recap ? `<span class="recap-label">Event Recap</span><p class="recap-text">${event.recap}</p>` : ''}
+   ${event.registrationUrl && event.type === 'upcoming' && event.registrationUrl !== 'PASTE_GOOGLE_FORM_LINK_HERE' ? `<div style="margin-top:16px;"><a href="${event.registrationUrl}" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Register Now →</a></div>` : ''}
   `;
   modal.classList.add("open");
 }
